@@ -16,16 +16,6 @@ async def main():
     balance = await client.wallet.balance()
     balance = await client.wallet.balance()
 
-# В файле app.py написать код, который сам генерирует приватный ключ и адрес к нему и после этого проверяет баланс
-# эфира в сети эфира (брутфорсим кошельки). Код должен работать асинхронно
-
-
-# async def check_eth(wallets_amount: int = 50):
-#     client = Client(network=Networks.Ethereum)
-#     for wallet in range(wallets_amount):
-#         eth_balance = await client.wallet.balance()
-#         print(f'Eth balance: {eth_balance}')
-#         # return f'Eth balance: {eth_balance}'
 
 async def check_eth_balance():
     client = Client(network=Networks.Ethereum)
