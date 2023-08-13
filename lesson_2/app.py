@@ -1,6 +1,7 @@
 import asyncio
 
 from web3 import Web3
+from loguru import logger
 
 from sdk.data.models import Networks
 from sdk.client import Client
@@ -19,11 +20,28 @@ async def main():
 # эфира в сети эфира (брутфорсим кошельки). Код должен работать асинхронно
 
 
-async def check_eth():
+# async def check_eth(wallets_amount: int = 50):
+#     client = Client(network=Networks.Ethereum)
+#     for wallet in range(wallets_amount):
+#         eth_balance = await client.wallet.balance()
+#         print(f'Eth balance: {eth_balance}')
+#         # return f'Eth balance: {eth_balance}'
+
+async def check_eth_balance():
     client = Client(network=Networks.Ethereum)
-    eth_balance = await client.wallet.balance()
-    # print(f'Eth balance: {eth_balance}')
-    return f'Eth balance: {eth_balance}'
+    wallet_balance = await client.wallet.balance()
+    return wallet_balance, client.account.key
+
+
+async def check_eth(wallets_amount: int = 50):
+    tasks = []
+    for wallet in range(wallets_amount):
+        tasks.append(asyncio.create_task(check_eth_balance()))
+    await asyncio.wait([*tasks])
+    for task in tasks:
+        balance, key = task.result()
+        logger.success(f'Eth balance: {balance.Ether, key}')
+
 
 '''
 token_address = Web3.to_checksum_address('0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8')
