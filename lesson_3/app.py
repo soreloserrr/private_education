@@ -60,22 +60,27 @@ async def main():
     # print(await client.transactions.decode_input_data(
     #     client=client,
     #     contract=Contracts.ARBITRUM_WOOFI,
-    #     input_data='0x7dc20382000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee000000000000000000000000af88d065e77c8cc2239327c5edb3a432268e583100000000000000000000000000000000000000000000000000038d7ea4c6800000000000000000000000000000000000000000000000000000000000001be86500000000000000000000000069c1dc6d723f15d7ef8154ba7194977fcc90d85b00000000000000000000000069c1dc6d723f15d7ef8154ba7194977fcc90d85b'
+    #     input_data='0x7dc20382000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee0000000000000000000000002f2a2543b76a4166549f7aab2e75bef0aefc5b0f00000000000000000000000000000000000000000000000000038d7ea4c68000000000000000000000000000000000000000000000000000000000000a5bdd0800000000000000000000000011d59cf60e81d722eaf4c28186617e426026f2ea00000000000000000000000011d59cf60e81d722eaf4c28186617e426026f2ea'
+    #     # input_data='0x7dc20382000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee000000000000000000000000af88d065e77c8cc2239327c5edb3a432268e583100000000000000000000000000000000000000000000000000038d7ea4c6800000000000000000000000000000000000000000000000000000000000001be86500000000000000000000000069c1dc6d723f15d7ef8154ba7194977fcc90d85b00000000000000000000000069c1dc6d723f15d7ef8154ba7194977fcc90d85b'
     # ))
 
-    # woofi = WooFi(client=client)
-    # res = await woofi.swap_eth_to_usdc(amount=TokenAmount(amount=0.001))
-    # res = await woofi.swap_usdc_to_eth()
-    # if 'Failed' in res:
-    #     logger.error(res)
-    # else:
-    #     logger.success(res)
-
-    tx_hash = '0xf9bd50990974b8107a8ef1a2d2dc79c5de6114b42d5533827068ddccabe35240'
-    tx = Tx(tx_hash=tx_hash)
-    print(tx)
-    print(await tx.parse_params(client=client))
-    print(await tx.decode_input_data(client=client, contract=Contracts.ARBITRUM_WOOFI))
+    woofi = WooFi(client=client)
+    # res = await woofi.swap_eth_to_usdt(amount=TokenAmount(amount=0.001))
+    # # res = await woofi.swap_usdc_to_eth(amount=TokenAmount(amount=1, decimals=6))
+    res = await woofi.swap_wbtc_to_eth(amount=TokenAmount(amount=0.0000311, decimals=8))
+    # res = await woofi.swap_eth_to_wbtc(amount=TokenAmount(amount=0.001))
+    # res = await woofi.swap_usdt_to_eth(amount=TokenAmount(amount=1, decimals=6))
+    # res = await woofi.swap_eth_to_usdt(amount=TokenAmount(amount=0.001))
+    if 'Failed' in res:
+        logger.error(res)
+    else:
+        logger.success(res)
+    #
+    # tx_hash = '0xf9bd50990974b8107a8ef1a2d2dc79c5de6114b42d5533827068ddccabe35240'
+    # tx = Tx(tx_hash=tx_hash)
+    # print(tx)
+    # print(await tx.parse_params(client=client))
+    # print(await tx.decode_input_data(client=client, contract=Contracts.ARBITRUM_WOOFI))
 
 
 if __name__ == '__main__':

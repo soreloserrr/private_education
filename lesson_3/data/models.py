@@ -17,3 +17,9 @@ class Contracts(Singleton):
     ARBITRUM_ETH = RawContract(
         address='0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE', abi=DefaultABIs.Token
     )
+    ARBITRUM_USDT = RawContract(
+        address='0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9', abi=DefaultABIs.Token
+    )
+    ARBITRUM_WBTC = RawContract(
+        address='0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f', abi=DefaultABIs.Token
+    )
