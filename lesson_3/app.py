@@ -65,12 +65,21 @@ async def main():
     # ))
 
     woofi = WooFi(client=client)
-    # res = await woofi.swap_eth_to_usdt(amount=TokenAmount(amount=0.001))
+    # res = await woofi.swap_eth_to_usdc(amount=TokenAmount(amount=1))
     # # res = await woofi.swap_usdc_to_eth(amount=TokenAmount(amount=1, decimals=6))
-    res = await woofi.swap_wbtc_to_eth(amount=TokenAmount(amount=0.0000311, decimals=8))
+    # res = await woofi.swap_wbtc_to_eth(amount=TokenAmount(amount=0.0000311, decimals=8))
     # res = await woofi.swap_eth_to_wbtc(amount=TokenAmount(amount=0.001))
-    # res = await woofi.swap_usdt_to_eth(amount=TokenAmount(amount=1, decimals=6))
+    # res = await woofi.swap_usdt_to_eth()
     # res = await woofi.swap_eth_to_usdt(amount=TokenAmount(amount=0.001))
+    res = await woofi.swap_eth_to_token(
+        amount=TokenAmount(amount=0.001),
+        token_ticker='usdt',
+        token_contract=Contracts.ARBITRUM_USDT
+    )
+    # res = await woofi.swap_token_to_eth(
+    #     token_ticker='wbtc',
+    #     token_contract=Contracts.ARBITRUM_WBTC
+    # )
     if 'Failed' in res:
         logger.error(res)
     else:
